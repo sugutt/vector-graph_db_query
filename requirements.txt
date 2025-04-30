@@ -1,0 +1,5 @@
+langchain
+neo4j
+upstash-vector
+openai
+tqdm

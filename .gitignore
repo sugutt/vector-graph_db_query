@@ -1,0 +1,8 @@
+# filepath: c:\Users\sugutt\codebase_query\.gitignore
+.venv/
+__pycache__/
+node_modules/
+dist/
+*.pyc
+*.log
+.env 
