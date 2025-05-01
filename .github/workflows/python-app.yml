@@ -26,8 +26,13 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install flake8 pytest
+        # Explicitly install flake8 and a recent pytest version
+        pip install flake8 "pytest>=6.0"
+        # Install other requirements if file exists
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Check pytest version
+      run: |
+        pytest --version
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
