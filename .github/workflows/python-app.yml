@@ -39,6 +39,15 @@ jobs:
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    - name: Run Pytest # <-- KEEP THIS STEP (Rename if desired)
+    - name: Run Pytest if tests exist
       run: |
-        pytest --no-tests-found-exit-code=0
+        # Check if any test files exist
+        TEST_FILES=$(find . -name "test_*.py" -o -name "*_test.py" | wc -l)
+        if [ "$TEST_FILES" -gt 0 ]; then
+          # Run pytest only if test files were found
+          pytest 
+        else
+          echo "No test files found, skipping pytest."
+          # Exit with code 0 (success)
+          exit 0
+        fi
