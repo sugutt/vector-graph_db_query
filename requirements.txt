@@ -4,3 +4,5 @@ upstash-vector
 openai
 tqdm
 langchain-community
+flake8
+pytest

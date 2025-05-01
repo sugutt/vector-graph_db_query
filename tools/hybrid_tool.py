@@ -9,7 +9,7 @@ from tools.graph_tool import execute_graph_query # Assuming execute_graph_query(
 
 # Initialize LLM for synthesis
 llm = ChatTogether(
-    model="mistralai/Mixtral-8x7B-Instruct-v0.1", # Or your preferred model
+    model="mistralai/Mixtral-8x7B-Instruct-v0.1",    # Or your preferred model
     temperature=0.1, # Low temp for synthesis
     together_api_key=os.environ["TOGETHER_API_KEY"]
 )
