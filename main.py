@@ -2,6 +2,8 @@ import argparse
 from ingest.scan import scan_project
 from config import DEFAULT_PROJECT_PATH
 from ingest.vector_ingest import load_and_split_files, ingest_to_upstash
+from ingest.graph_builder import CodeGraphBuilder
+import os
 
 def main():
     parser = argparse.ArgumentParser(description="Scan and process a codebase.")
@@ -19,6 +21,16 @@ def main():
     # After scanning files...
     docs = load_and_split_files(files)
     ingest_to_upstash(docs)
+
+    graph = CodeGraphBuilder(
+    uri=os.environ["NEO4J_URI"],
+    user=os.environ["NEO4J_USER"],
+    password=os.environ["NEO4J_PASSWORD"],
+    )
+
+    graph.clear_graph()
+    graph.build_graph_from_files(files)
+    graph.close()
 
 
 if __name__ == "__main__":
